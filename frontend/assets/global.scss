@@ -1,5 +1,5 @@
 html {
-  font-family: 'Barlow', sans-serif;
+  font-family: 'Nunito', sans-serif;
   overflow-y: auto !important;
 }
 
@@ -24,4 +24,11 @@ html {
 
 .cursor-pointer {
   cursor: pointer;
+}
+
+.v-pagination__navigation:active,
+.v-pagination__navigation:focus
+.v-pagination__item:active,
+.v-pagination__item:focus {
+  outline: none;
 }

@@ -2,6 +2,8 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
 
@@ -16,10 +18,16 @@ use App\Http\Controllers\Auth\LogoutController;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+Route::middleware('auth:sanctum')->get('/me', function (Request $request) {
     return $request->user();
 });
 
 // Authentication routes
 Route::post('/login', LoginController::class);
 Route::post('/logout', LogoutController::class);
+
+// Resource routes
+Route::group(['middleware' => ['auth:sanctum']], function () {
+    Route::resource('users', UserController::class);
+    Route::resource('companies', CompanyController::class);
+});

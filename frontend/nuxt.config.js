@@ -25,7 +25,7 @@ export default {
       {
         rel: 'stylesheet',
         href:
-          'https://fonts.googleapis.com/css2?family=Barlow:wght@200;400;600;800&display=swap',
+          'https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;900&display=swap',
       },
     ],
   },
@@ -34,7 +34,7 @@ export default {
   css: ['~/assets/global.scss'],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: [],
+  plugins: ['~plugins/filters.js'],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
@@ -59,13 +59,16 @@ export default {
     strategies: {
       laravelSanctum: {
         provider: 'laravel/sanctum',
-        url: process.env.API_URL || 'http://localhost',
+        url: process.env.SANCTUM_URL || 'http://localhost',
         endpoints: {
           login: {
             url: '/api/login',
           },
           logout: {
             url: '/api/logout',
+          },
+          user: {
+            url: '/api/me',
           },
         },
       },
@@ -84,13 +87,13 @@ export default {
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
-    baseUrl: process.env.API_URL,
     credentials: true,
   },
 
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify
   vuetify: {
     customVariables: ['~/assets/variables.scss'],
+    treeShake: true,
     theme: {
       dark: false,
       themes: {
@@ -118,6 +121,16 @@ export default {
     register: [
       // Register custom toasts
     ],
+  },
+
+  loading: {
+    color: '#F0F0F0',
+    failedColor: '#d71f4a',
+    height: '2px',
+  },
+
+  privateRuntimeConfig: {
+    apiURL: process.env.SANCTUM_URL,
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build

@@ -1,3 +1,5 @@
 *
 !public/
 !.gitignore
+!logos/
+!logos/logo.png

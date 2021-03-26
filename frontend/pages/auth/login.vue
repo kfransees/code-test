@@ -19,7 +19,7 @@
 </template>
 
 <script>
-import LoginForm from '~/components/forms/LoginForm'
+import LoginForm from '~/components/Forms/LoginForm'
 import Logo from '~/components/Logo'
 
 export default {

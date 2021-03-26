@@ -8,14 +8,22 @@
       app
       clipped
     >
-      <div class="d-flex justify-center mt-5"></div>
-      <div class="text-center my-3">
+      <div class="d-flex justify-center mt-12">
+        <user-avatar
+          :image-url="user.avatar"
+          :name="`${user.first_name} ${user.last_name}`"
+          :size="100"
+          font-size="40"
+          color="grey darken-3"
+        />
+      </div>
+      <div class="text-center mt-3 mb-12">
         <div class="title font-weight-bold">
           {{ user.first_name }} {{ user.last_name }}
         </div>
-        <!-- <div class="grey--text subtitle-2">
-          {{ user.role.name }}
-        </div> -->
+        <div class="grey--text subtitle-2">
+          {{ user.roles[0].name }}
+        </div>
       </div>
       <v-list>
         <template v-for="(item, key) in menuItems" class="d-flex">
@@ -61,8 +69,20 @@
           <span class="justify-end">
             <v-menu offset-y>
               <template #activator="{ on }">
-                <v-avatar class="cursor-pointer" size="34" v-on="on">
-                  <v-img src="https://picsum.photos/200" />
+                <v-avatar
+                  class="cursor-pointer"
+                  color="grey darken-3"
+                  :size="35"
+                  v-on="on"
+                >
+                  <v-img v-if="user.avatar" contain :src="user.avatar" />
+                  <span
+                    v-else
+                    class="white--text font-weight-bold"
+                    :style="{ fontSize: '14px' }"
+                  >
+                    {{ `${user.first_name} ${user.last_name}` | initials }}
+                  </span>
                 </v-avatar>
               </template>
               <v-card class="px-2">
@@ -104,11 +124,13 @@
 </template>
 
 <script>
-// import permissions from '~/components/mixins/permissions-mixin'
+import UserAvatar from '~/components/Common/UserAvatar'
 import { Roles } from '~/constants'
 
 export default {
-  // mixins: [permissions],
+  components: {
+    UserAvatar,
+  },
   data() {
     return {
       drawer: true,
@@ -155,8 +177,8 @@ export default {
             },
             {
               icon: 'group',
-              title: 'Employees',
-              to: '/employees',
+              title: 'Users',
+              to: '/users',
             },
           ]
           break

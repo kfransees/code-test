@@ -19,8 +19,9 @@ COPY . /var/www/html
 
 # change permissions on files so the api can function
 RUN usermod -u 1000 www-data && groupmod -g 1000 www-data
-RUN chown -R www-data:www-data /var/www/html/bootstrap
-RUN chown -R www-data:www-data /var/www/html/storage
+RUN chown -R www-data:www-data /var/wwww
+RUN chown -R 777 /var/www/storage
+RUN chmod 777 -R storage/
 
 # Install composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
