@@ -20,7 +20,6 @@ COPY . /var/www/html
 # change permissions on files so the api can function
 RUN usermod -u 1000 www-data && groupmod -g 1000 www-data
 RUN chown -R www-data:www-data /var/www
-RUN chown -R 777 /var/www/storage
 RUN chmod 777 -R storage/
 
 # Install composer
